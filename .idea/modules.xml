@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Graphic_Processor/.idea/Graphic_Processor.iml" filepath="$PROJECT_DIR$/../Graphic_Processor/.idea/Graphic_Processor.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Individual_Voice_Identify.iml" filepath="$PROJECT_DIR$/.idea/Individual_Voice_Identify.iml" />
     </modules>
   </component>
