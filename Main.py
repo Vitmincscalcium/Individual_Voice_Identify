@@ -4,6 +4,10 @@ from sklearn.model_selection import train_test_split
 from Lib import load_file, data_classify, train_model, evaluation, prediction
 from Lib.Preprocess import remove_silence
 
+# 该项目为2024学年西北工业大学机器学习的课程作业，如果学弟学妹想使用，请随意使用并完善该代码
+# 当前仍有识别数据集外音频会硬套一个已有标签并高置信的问题，我们组的成员均非人工智能相关课题组的硕士生，希望优秀的大家指正
+# This project is for the NWPU machine learning course in 2024. Anyone is welcome to use it and contribute by forking the repository.
+# Currently, there is an issue with identifying voices outside of the dataset. None of our team members specialize in AI, so we hope others will help improve and upgrade this project.
 
 def main():
     folders = load_file(True)
