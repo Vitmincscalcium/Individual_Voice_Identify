@@ -23,7 +23,7 @@ def load_file(_train):
 
     return folders
 
-def remove_silence(_file, _threshold, _save_path, _need_graphic=False):
+def remove_silence(_file, _threshold, _save_path, _need_graphic=False, _graphic_save_path = './Sample/remove_silence.png'):
     y, sr = librosa.load(_file)
     # 获取音频的能量值
     intervals = librosa.effects.split(y, top_db=_threshold)
@@ -52,6 +52,7 @@ def remove_silence(_file, _threshold, _save_path, _need_graphic=False):
 
         # 显示图像
         plt.tight_layout()
+        plt.savefig(_graphic_save_path)
         plt.show()
 
     if _save_path is not None:
@@ -59,7 +60,7 @@ def remove_silence(_file, _threshold, _save_path, _need_graphic=False):
 
     return non_silent_audio, sr
 
-def data_classify(_folders, _need_visible_data):
+def data_classify(_folders, _need_graphics):
     temp_features = []
     features = []
     labels = []
@@ -71,7 +72,7 @@ def data_classify(_folders, _need_visible_data):
 
         for file in tqdm(glob.glob(os.path.join(folder, '*.wav'))):
             data = remove_silence(file,30, None)
-            mfcc, _ = extract_mfcc(file, data, _need_visible_data)
+            mfcc, _ = extract_mfcc(file, data, _need_graphics)
             # print(mfcc.shape)
             if mfcc is not None:
                 frame_len.append(mfcc.shape[0])

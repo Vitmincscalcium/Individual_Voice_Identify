@@ -28,7 +28,7 @@
   - `_need_graphic`：是否需要绘制时域图。
 - **返回**：去除静音后的音频数据。
 
-### `data_classify(_folders, _need_visible_data)`
+### `data_classify(_folders, _need_graphics)`
 将音频文件数据分类，提取 MFCC 特征并标注标签。
 
 - **参数**：
@@ -40,7 +40,7 @@
 
 ## 2. **特征提取**
 
-### `extract_mfcc(_file, _data, _need_visible_data, _mel=13, _nfft=2048)`
+### `extract_mfcc(_file, _data, _need_graphics, _mel=13, _nfft=2048)`
 从音频中提取 MFCC 特征。
 
 - **参数**：
@@ -51,7 +51,7 @@
   - `_nfft`：FFT 点数（默认 2048）。
 - **返回**：返回提取的 MFCC 特征和采样率。
 
-### `pad_or_clip_features(features, target_length)`
+### `pad_or_clip_features(_features, _target_length)`
 填充或裁剪特征，使其长度符合模型要求。
 
 - **参数**：
@@ -72,7 +72,7 @@
 
 ## 3. **模型构建与训练**
 
-### `build_model(input_shape, num_classes)`
+### `build_model(_input_shape, _num_classes)`
 构建一个 1D 卷积神经网络（CNN）模型，用于语音识别。
 
 - **参数**：

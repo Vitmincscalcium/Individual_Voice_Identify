@@ -10,7 +10,7 @@ from matplotlib import rcParams
 rcParams['font.sans-serif'] = ['SimHei']  # 黑体字体
 rcParams['axes.unicode_minus'] = False    # 解决负号显示问题
 
-def extract_mfcc(_file, _data, _need_visible_data, _mel=13, _nfft=2048):
+def extract_mfcc(_file, _data, _need_graphics, _mel=13, _nfft=2048):
     if _data:
         signal, fs = _data
     else:
@@ -18,30 +18,32 @@ def extract_mfcc(_file, _data, _need_visible_data, _mel=13, _nfft=2048):
     # 提取 MFCC 特征
     try:
         mfcc = psf.mfcc(signal, fs, numcep=_mel, nfft=_nfft)
-        if _need_visible_data:
+        if _need_graphics:
             mfcc_heat_map(mfcc, fs, _file)
         return mfcc, fs
     except Exception as e:
-        print(f"Error processing {_file}: {e}")
+        print(f"提取发生错误 {_file}: {e}")
         return None
 
-def pad_or_clip_features(features, target_length):
+def pad_or_clip_features(_features, _target_length):
     # 如果特征数小于目标帧数，填充零；如果大于目标帧数，裁剪
-    if features.shape[0] < target_length:
-        padding = np.zeros((target_length - features.shape[0], features.shape[1]))
-        features = np.vstack([features, padding])
-    elif features.shape[0] > target_length:
-        features = features[:target_length, :]
-    return features
+    if _features.shape[0] < _target_length:
+        padding = np.zeros((_target_length - _features.shape[0], _features.shape[1]))
+        _features = np.vstack([_features, padding])
+    elif _features.shape[0] > _target_length:
+        _features = _features[:_target_length, :]
+    return _features
 
 def mfcc_heat_map(_mfcc, _fs, _file_name):
+    _save_path ='./Sample/' + os.path.splitext(os.path.basename(_file_name))[0] + '.png'
     plt.figure(figsize=(10, 6))
     librosa.display.specshow(_mfcc.T, x_axis='frames', sr=_fs, cmap='coolwarm')
     # 添加标题和标签
     plt.colorbar(format='%+2.0f dB')
-    plt.title(_file_name + ' Mel倒谱系数热度图')
+    plt.title(os.path.basename(_file_name) + ' 的Mel倒谱系数热度图')
     plt.xlabel('帧数')
     plt.ylabel('MFCC系数')
+    # 显示热图并保存
     plt.tight_layout()
-    # 显示热图
+    plt.savefig(_save_path)
     plt.show()
